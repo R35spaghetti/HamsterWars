@@ -78,7 +78,7 @@ namespace HamsterWarsApi.Controllers
         //TODO: Fixa med "parameters"
         //Skapa hamster
         [HttpPost]
-        public async Task<ActionResult<HamsterDTO>> CreateHamster([FromBody] Hamster createHamster)
+        public async Task<ActionResult<HamsterDTO>> CreateHamster(string Name, int Age, string FavFood, string Loves, string ImgName, int Wins, int losses, int games, [FromBody] Hamster createHamster)
         {
 
             var newHamster = await this.HamsterRepository.CreateHamster(createHamster);
@@ -92,7 +92,7 @@ namespace HamsterWarsApi.Controllers
 
             //var newHamsterDTO = newHamster.ConvertToHamsterDTO();
 
-            return CreatedAtAction(nameof(CreateHamster), new {id = createHamster.Id}, createHamster);
+            return CreatedAtAction(nameof(CreateHamster), new {Name = createHamster.Name, Age = createHamster.Age, FavFood = createHamster.FavFood, Loves = createHamster.Loves, ImgName = createHamster.ImgName, Wins = createHamster.Wins, losses = createHamster.Losses, games = createHamster.Games}, createHamster);
 
 
 
