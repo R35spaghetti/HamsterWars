@@ -26,18 +26,17 @@ namespace HamsterWarsApi.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<Hamster> GetHamster(int id)
+        public async Task<Hamster> GetHamster(int id)
         {
-            throw new NotImplementedException();
+            var hamster = await  this.hamsterDbContext.Hamsters.SingleOrDefaultAsync(x=>x.Id == id);
+            return hamster;
         }
 
         public async Task<IEnumerable<Hamster>> GetHamsters()
         {
 
             return await this.hamsterDbContext.Hamsters.ToArrayAsync();
-            //var hamsters = await this.hamsterDbContext.Hamsters.ToArrayAsync();
-
-            //return hamsters;
+          
         }
 
         public Task<Hamster> GetRandomHamster(int id)

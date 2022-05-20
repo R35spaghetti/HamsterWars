@@ -20,12 +20,12 @@ namespace HamsterWarsApi.Controllers
 
         [HttpGet]
         [Route(nameof(GetHamsters))]
-        public async Task<ActionResult<IEnumerable<Hamster>>> GetHamsters()
+        public async Task<ActionResult<IEnumerable<HamsterDTO>>> GetHamsters()
         {
             try
             {
                 var hamsters = await HamsterRepository.GetHamsters();
-                //dto conversion
+                //TODO: DTO conversion
                         return Ok(hamsters);
 
             }
@@ -38,7 +38,32 @@ namespace HamsterWarsApi.Controllers
             
 
         }
+        [HttpGet("{id:int}")]
+        public async Task<ActionResult<HamsterDTO>> GetHamster(int id)
+        {
+            try
+            {
+                var hamster = await HamsterRepository.GetHamster(id);
+                //TODO: conversion
+                if (hamster == null)
+                {
+                    return BadRequest();
+                }
+                else
+                {
+                    return Ok(hamster);
+                }
 
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                                "Error retrieving data from the database");
+            }
+
+
+
+        }
     }
 
 }
