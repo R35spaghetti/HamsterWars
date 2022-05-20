@@ -20,7 +20,7 @@ namespace HamsterWarsApi.Repositories
         {
             return await this.hamsterDbContext.Hamsters.AnyAsync(x => x.Id == Id);
         }
-
+        //Null här
         //TODO: Skapa en hamster
         public async Task<Hamster> CreateHamster(Hamster hamsterToAdd)
         {
