@@ -19,6 +19,7 @@ namespace HamsterWarsApi.Controllers
             this.HamsterRepository = (HamsterRepository?)HamsterRepository;
         }
 
+        //Hämta alla hamstrar
         [HttpGet]
         [Route(nameof(GetHamsters))]
         public async Task<ActionResult<IEnumerable<HamsterDTO>>> GetHamsters()
@@ -43,9 +44,10 @@ namespace HamsterWarsApi.Controllers
                                 "Error retrieving data from the database");
             }
 
-            
+
 
         }
+        //Hämta en hamster
         [HttpGet("{id:int}")]
         public async Task<ActionResult<HamsterDTO>> GetHamster(int id)
         {
@@ -71,6 +73,78 @@ namespace HamsterWarsApi.Controllers
             }
 
 
+
+        }
+        //TODO: Fixa med "parameters"
+        //Skapa hamster
+        [HttpPost]
+        public async Task<ActionResult<HamsterDTO>> CreateHamster([FromBody] Hamster createHamster)
+        {
+
+            var newHamster = await this.HamsterRepository.CreateHamster(createHamster);
+
+            if (createHamster is null)
+            {
+                return NoContent();
+
+            }
+          
+
+            //var newHamsterDTO = newHamster.ConvertToHamsterDTO();
+
+            return CreatedAtAction(nameof(CreateHamster), new {id = createHamster.Id}, createHamster);
+
+
+
+        }
+
+        //Ta bort hamster
+        [HttpDelete("{id:int}")]
+        public async Task<ActionResult<HamsterDTO>> DeleteHamster(int id)
+        {
+            try
+            {
+                var hamster = await this.HamsterRepository.DeleteHamster(id);
+
+                if (hamster == null)
+                {
+                    return NotFound();
+                }
+
+                var hamsterDTO = hamster.ConvertToHamsterDTO();
+
+                return Ok(hamsterDTO);
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+
+
+        }
+        //Uppdatera hamster
+        [HttpPatch("{id:int}")]
+        public async Task<ActionResult<HamsterDTO>> UpdateHamster(int id, Hamster hamsterToUpdate)
+        {
+            try
+            {
+                var hamster = await this.HamsterRepository.UpdateHamster(id, hamsterToUpdate);
+                if (hamster == null)
+                {
+                    return NotFound();
+                }
+
+
+                var hamsterDTO = hamster.ConvertToHamsterDTO();
+
+                return Ok(hamsterDTO);
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
 
         }
     }

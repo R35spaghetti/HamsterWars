@@ -6,15 +6,15 @@ namespace HamsterWarsApi.Repositories.Contracts
     {
         //Endast ha DTOhamstern?
         Task<IEnumerable<Hamster>> GetHamsters();
-        Task<Hamster> GetRandomHamster(int id);
+        Task<Hamster> GetRandomHamster();
 
         Task<Hamster> GetHamster(int id);
 
-        Task CreateHamster(Hamster hamster);
+        Task<Hamster> CreateHamster(Hamster hamster);
 
-        Task UpdateHamster(int id, Hamster hamsterToUpdate);
+        Task<Hamster> UpdateHamster(int id, Hamster hamsterToUpdate);
 
-        Task DeleteHamster(int id);
+        Task<Hamster> DeleteHamster(int id);
 
 
 
