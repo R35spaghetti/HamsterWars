@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using HamsterWarsApi.Repositories;
 using HamsterWarsApi.Models;
 using HamsterWarsApi.Repositories.Contracts;
+using HamsterWarsApi.Extensions;
 
 namespace HamsterWarsApi.Controllers
 {
@@ -25,9 +26,16 @@ namespace HamsterWarsApi.Controllers
             try
             {
                 var hamsters = await HamsterRepository.GetHamsters();
-                //TODO: DTO conversion
-                        return Ok(hamsters);
 
+                if (hamsters is null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    var hamstersDtos = hamsters.ConvertToHamstersDTO();
+                    return Ok(hamstersDtos);
+                }
             }
             catch (Exception)
             {
@@ -44,14 +52,15 @@ namespace HamsterWarsApi.Controllers
             try
             {
                 var hamster = await HamsterRepository.GetHamster(id);
-                //TODO: conversion
+
                 if (hamster == null)
                 {
                     return BadRequest();
                 }
                 else
                 {
-                    return Ok(hamster);
+                    var hamsterDto = hamster.ConvertToHamsterDTO();
+                    return Ok(hamsterDto);
                 }
 
             }
