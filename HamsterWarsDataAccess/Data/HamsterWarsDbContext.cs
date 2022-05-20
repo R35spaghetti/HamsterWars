@@ -6,6 +6,10 @@ namespace HamsterWarsApi.Data
     public class HamsterWarsDbContext : DbContext
     {
 
+    
+
+
+
         public HamsterWarsDbContext(DbContextOptions<HamsterWarsDbContext> options) : base(options)
         { }
 
@@ -46,6 +50,8 @@ namespace HamsterWarsApi.Data
             });
         }
         public DbSet<Hamster> Hamsters { get; set; } = null!;
+
+
 
     }
 }
