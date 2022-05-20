@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using HamsterWarsApi.Repositories;
 using HamsterWarsApi.Models;
+using HamsterWarsApi.Repositories.Contracts;
 
 namespace HamsterWarsApi.Controllers
 {
@@ -12,9 +13,9 @@ namespace HamsterWarsApi.Controllers
 
         private readonly HamsterRepository HamsterRepository;
 
-        public HamsterController(HamsterRepository hamsterRepository)
+        public HamsterController(IHamsterRepository HamsterRepository)
         {
-            this.HamsterRepository = hamsterRepository;
+            this.HamsterRepository = (HamsterRepository?)HamsterRepository;
         }
 
         [HttpGet]
@@ -24,6 +25,7 @@ namespace HamsterWarsApi.Controllers
             try
             {
                 var hamsters = await HamsterRepository.GetHamsters();
+                //dto conversion
                         return Ok(hamsters);
 
             }

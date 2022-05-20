@@ -52,6 +52,8 @@ namespace HamsterWarsApi.Data
         public DbSet<Hamster> Hamsters { get; set; } = null!;
 
 
-
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+        }
     }
 }

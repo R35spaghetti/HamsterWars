@@ -16,7 +16,7 @@ namespace HamsterWarsApi.Repositories
             this.hamsterDbContext = hamsterDbContext;
         }
 
-        public Task CreateHamster(HamsterDTO hamster)
+        public Task CreateHamster(Hamster hamster)
         {
             throw new NotImplementedException();
         }
@@ -45,7 +45,7 @@ namespace HamsterWarsApi.Repositories
             throw new NotImplementedException();
         }
 
-        public Task UpdateHamster(int id, HamsterDTO hamsterToUpdate)
+        public Task UpdateHamster(int id, Hamster hamsterToUpdate)
         {
             throw new NotImplementedException();
         }

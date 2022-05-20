@@ -1,4 +1,6 @@
 using HamsterWarsApi.Data;
+using HamsterWarsApi.Repositories;
+using HamsterWarsApi.Repositories.Contracts;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -11,10 +13,11 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-
+builder.Services.AddMvc();
 builder.Services.AddDbContextPool<HamsterWarsDbContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("HappyTurtleConnection")));
 
+builder.Services.AddScoped<IHamsterRepository, HamsterRepository>();
 
 var app = builder.Build();
 

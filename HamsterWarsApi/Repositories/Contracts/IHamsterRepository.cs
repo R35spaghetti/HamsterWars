@@ -1,5 +1,4 @@
-﻿using HamsterWarsApi.Dto;
-using HamsterWarsApi.Models;
+﻿using HamsterWarsApi.Models;
 
 namespace HamsterWarsApi.Repositories.Contracts
 {
@@ -11,9 +10,9 @@ namespace HamsterWarsApi.Repositories.Contracts
 
         Task<Hamster> GetHamster(int id);
 
-        Task CreateHamster(HamsterDTO hamster);
+        Task CreateHamster(Hamster hamster);
 
-        Task UpdateHamster(int id, HamsterDTO hamsterToUpdate);
+        Task UpdateHamster(int id, Hamster hamsterToUpdate);
 
         Task DeleteHamster(int id);
 
