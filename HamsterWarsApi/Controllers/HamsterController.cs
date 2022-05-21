@@ -75,12 +75,43 @@ namespace HamsterWarsApi.Controllers
 
 
         }
-        //TODO: Fixa med "parameters"
+
+        //Hämta en slumpmässig hamster
+        [HttpGet]
+        [Route(nameof(GetRandomHamster))]
+        public async Task<ActionResult<HamsterDTO>> GetRandomHamster()
+        {
+            try
+            {
+                var hamster = await HamsterRepository.GetRandomHamster();
+
+                if (hamster == null)
+                {
+                    return BadRequest();
+                }
+                else
+                {
+                    var hamsterDto = hamster.ConvertToHamsterDTO();
+                    return Ok(hamsterDto);
+                }
+
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                                "Error retrieving data from the database");
+            }
+
+
+
+        }
+
+
         //Skapa hamster
         [HttpPost]
         public async Task<ActionResult<HamsterForCreationDTO>> CreateHamster(string Name, int Age, string FavFood, string Loves, string ImgName, int Wins, int losses, int games, [FromBody] Hamster createHamster)
         {
-            //Här funkar create
+            //Här funkar create, bryt i en egen metod eller använd autoMapping
             createHamster.Name = Name;
             createHamster.Age = Age;
             createHamster.FavFood = FavFood;

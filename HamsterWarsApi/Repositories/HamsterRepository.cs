@@ -20,8 +20,7 @@ namespace HamsterWarsApi.Repositories
         {
             return await this.hamsterDbContext.Hamsters.AnyAsync(x => x.Id == Id);
         }
-        //Null här
-        //TODO: Skapa en hamster
+        
         public async Task<Hamster> CreateHamster(Hamster hamsterToAdd)
         {
 
@@ -86,10 +85,41 @@ namespace HamsterWarsApi.Repositories
             return await this.hamsterDbContext.Hamsters.ToArrayAsync();
           
         }
-        //TODO: Får fram en slumpad hamster
-        public  Task<Hamster> GetRandomHamster()
+        //Får fram en slumpad hamster
+        //TODO: bryt ut metoder
+        public  async Task<Hamster> GetRandomHamster()
         {
-            throw new NotImplementedException();
+
+            List<Hamster> allIDs = new List<Hamster>();
+
+            //En metod
+            int highestNumber = 0;
+            int randomHamster = 0;
+        
+            var getLastID = await this.hamsterDbContext.Hamsters.OrderByDescending(x=>x.Id).FirstOrDefaultAsync(); //LastOrDefaultAsync funkade inte
+            highestNumber = getLastID.Id;
+
+            for(int i = 1; i <= highestNumber; i++)
+            {
+                
+                var hamster = await this.hamsterDbContext.Hamsters.SingleOrDefaultAsync(x => x.Id == i);
+               
+                if(hamster is null)
+                { }
+              
+                else
+                {
+                    allIDs.Add(hamster);
+                }
+            }
+
+            //En metod
+            var random = new Random();
+            randomHamster = random.Next(allIDs.Count);
+
+            var getRandomHamster = (allIDs[randomHamster]);
+
+            return getRandomHamster;
         }
 
         //TODO: fixa att en sak blir uppdaterad och resten får gamla värden, eller om det sker i frontend?
