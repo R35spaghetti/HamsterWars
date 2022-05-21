@@ -78,8 +78,17 @@ namespace HamsterWarsApi.Controllers
         //TODO: Fixa med "parameters"
         //Skapa hamster
         [HttpPost]
-        public async Task<ActionResult<HamsterDTO>> CreateHamster(string Name, int Age, string FavFood, string Loves, string ImgName, int Wins, int losses, int games, [FromBody] Hamster createHamster)
+        public async Task<ActionResult<HamsterForCreationDTO>> CreateHamster(string Name, int Age, string FavFood, string Loves, string ImgName, int Wins, int losses, int games, [FromBody] Hamster createHamster)
         {
+            //Här funkar create
+            createHamster.Name = Name;
+            createHamster.Age = Age;
+            createHamster.FavFood = FavFood;
+            createHamster.Loves = Loves;
+            createHamster.ImgName = ImgName;
+            createHamster.Wins = Wins;
+            createHamster.Losses = losses;
+            createHamster.Games = games;
 
             var newHamster = await this.HamsterRepository.CreateHamster(createHamster);
 
@@ -88,9 +97,9 @@ namespace HamsterWarsApi.Controllers
                 return NoContent();
 
             }
-          
 
-            //var newHamsterDTO = newHamster.ConvertToHamsterDTO();
+
+            var newHamsterDTO = newHamster.ConvertToHamsterDTO();
 
             return CreatedAtAction(nameof(CreateHamster), new {Name = createHamster.Name, Age = createHamster.Age, FavFood = createHamster.FavFood, Loves = createHamster.Loves, ImgName = createHamster.ImgName, Wins = createHamster.Wins, losses = createHamster.Losses, games = createHamster.Games}, createHamster);
 

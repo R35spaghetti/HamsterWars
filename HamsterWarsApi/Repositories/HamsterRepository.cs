@@ -24,6 +24,8 @@ namespace HamsterWarsApi.Repositories
         //TODO: Skapa en hamster
         public async Task<Hamster> CreateHamster(Hamster hamsterToAdd)
         {
+
+            //Är denna ens korrekt?
             if (await CheckIfHamsterExist(hamsterToAdd.Id) == false)
               {
                 var hamster = await (from Hamster in this.hamsterDbContext.Hamsters
@@ -45,7 +47,7 @@ namespace HamsterWarsApi.Repositories
 
                 if (hamsterToAdd != null)
                 {
-                    var result = await this.hamsterDbContext.Hamsters.AddAsync(hamster);
+                    var result = await this.hamsterDbContext.Hamsters.AddAsync(hamsterToAdd);
                     await this.hamsterDbContext.SaveChangesAsync();
                     return result.Entity;
                 }
