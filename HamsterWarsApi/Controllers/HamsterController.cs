@@ -109,7 +109,7 @@ namespace HamsterWarsApi.Controllers
 
         //Skapa hamster
         [HttpPost]
-        public async Task<ActionResult<HamsterForCreationDTO>> CreateHamster(string Name, int Age, string FavFood, string Loves, string ImgName, int Wins, int losses, int games, [FromBody] Hamster createHamster)
+        public async Task<ActionResult<HamsterToCreateDTO>> CreateHamster(string Name, int Age, string FavFood, string Loves, string ImgName, int Wins, int losses, int games, [FromBody] Hamster createHamster)
         {
             //Här funkar create, bryt i en egen metod eller använd autoMapping
             createHamster.Name = Name;
@@ -164,9 +164,19 @@ namespace HamsterWarsApi.Controllers
 
         }
         //Uppdatera hamster
-        [HttpPatch("{id:int}")]
-        public async Task<ActionResult<HamsterDTO>> UpdateHamster(int id, Hamster hamsterToUpdate)
+        [HttpPut("{id:int}")]
+        public async Task<ActionResult<HamsterToUpdateDTO>> UpdateHamster(int id, string Name, int Age, string FavFood, string Loves, string ImgName, int Wins, int losses, int games, [FromBody] Hamster hamsterToUpdate)
         {
+            //Bör vara i samma metod som create använder, TODO: använd tuple här
+            hamsterToUpdate.Name = Name;
+            hamsterToUpdate.Age = Age;
+            hamsterToUpdate.FavFood = FavFood;
+            hamsterToUpdate.Loves = Loves;
+            hamsterToUpdate.ImgName = ImgName;
+            hamsterToUpdate.Wins = Wins;
+            hamsterToUpdate.Losses = losses;
+            hamsterToUpdate.Games = games;
+
             try
             {
                 var hamster = await this.HamsterRepository.UpdateHamster(id, hamsterToUpdate);

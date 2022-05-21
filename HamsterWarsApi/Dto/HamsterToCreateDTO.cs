@@ -2,7 +2,7 @@
 
 namespace HamsterWarsApi.Dto
 {
-    public record HamsterForCreationDTO
+    public record HamsterToCreateDTO
     {
         [Required]
         public string Name { get; set; } = string.Empty;
