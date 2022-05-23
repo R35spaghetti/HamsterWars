@@ -1,0 +1,43 @@
+﻿@page "/gallery"
+
+<h3>Gallery</h3>
+
+if(hamsters is null){
+    <p><em>Loding...</em></p>
+}
+else
+{
+     <div class="row">
+        @foreach(Hamster hamster in hamsters)
+        {
+         <div class="container d-flex align-items-center justify-content-center flex-wrap">
+             <div class="row">
+                 <div class="col-12">
+           <div class="box">
+             <div class="body">
+               <div class="imgContainer">
+                    <img src="@hamster.ImgName" alt="">
+                </div>
+                <div class="content d-flex flex-column align-items-center justify-content-center">
+                    <div>
+                        <h3 class="text-white fs-5">@hamster.Name</h3>
+                        <p class="fs-6 text-white">@hamster.Age</p>
+                        <p class="fs-6 text-white">@hamster.FavFood</p>
+                        <p class="fs-6 text-white">@hamster.Loves</p>
+                        <p class="fs-6 text-white">@hamster.Wins</p>
+                        <p class="fs-6 text-white">@hamster.Losses</p>
+                        <p class="fs-6 text-white">@hamster.Games</p>
+                    </div>
+                </div>
+                </div>
+                </div>
+            </div>
+        </div>
+      </div>
+        }
+        
+    </div>
+}
+@code {
+    private List<Hamster>? hamsters;
+}

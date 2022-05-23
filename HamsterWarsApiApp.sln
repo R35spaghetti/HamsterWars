@@ -5,7 +5,9 @@ VisualStudioVersion = 17.2.32516.85
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HamsterWarsApi", "HamsterWarsApi\HamsterWarsApi.csproj", "{9C203634-DC6D-43B5-8D28-C39AC523B393}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HamsterWarsDataAccess", "HamsterWarsDataAccess\HamsterWarsDataAccess.csproj", "{18A9B1E1-71C7-4B1F-A267-9F79F488A954}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HamsterWarsDataAccess", "HamsterWarsDataAccess\HamsterWarsDataAccess.csproj", "{18A9B1E1-71C7-4B1F-A267-9F79F488A954}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HamsterWars.Web", "HamsterWars.Web\HamsterWars.Web.csproj", "{EA57325B-87CE-4889-8DA5-96B90BA8CA08}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{18A9B1E1-71C7-4B1F-A267-9F79F488A954}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{18A9B1E1-71C7-4B1F-A267-9F79F488A954}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{18A9B1E1-71C7-4B1F-A267-9F79F488A954}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA57325B-87CE-4889-8DA5-96B90BA8CA08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA57325B-87CE-4889-8DA5-96B90BA8CA08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA57325B-87CE-4889-8DA5-96B90BA8CA08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA57325B-87CE-4889-8DA5-96B90BA8CA08}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
