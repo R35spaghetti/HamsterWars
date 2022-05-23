@@ -46,6 +46,9 @@ namespace HamsterWarsApi.Repositories
 
                 if (hamsterToAdd != null)
                 {
+
+         
+
                     var result = await this.hamsterDbContext.Hamsters.AddAsync(hamsterToAdd);
                     await this.hamsterDbContext.SaveChangesAsync();
                     return result.Entity;
@@ -86,41 +89,64 @@ namespace HamsterWarsApi.Repositories
           
         }
         //Får fram en slumpad hamster
-        //TODO: bryt ut metoder
         public  async Task<Hamster> GetRandomHamster()
         {
 
-            List<Hamster> allIDs = new List<Hamster>();
-
-            //En metod
+            List<Hamster> allHamsterIDs = new List<Hamster>();
+            Hamster getRandomHamster = new Hamster();
             int highestNumber = 0;
-            int randomHamster = 0;
-        
-            var getLastID = await this.hamsterDbContext.Hamsters.OrderByDescending(x=>x.Id).FirstOrDefaultAsync(); //LastOrDefaultAsync funkade inte
+
+
+            var getLastID = await this.hamsterDbContext.Hamsters.OrderByDescending(x => x.Id).FirstOrDefaultAsync(); //LastOrDefaultAsync funkade inte
             highestNumber = getLastID.Id;
 
-            for(int i = 1; i <= highestNumber; i++)
-            {
-                
-                var hamster = await this.hamsterDbContext.Hamsters.SingleOrDefaultAsync(x => x.Id == i);
-               
-                if(hamster is null)
-                { }
-              
-                else
-                {
-                    allIDs.Add(hamster);
-                }
-            }
 
-            //En metod
-            var random = new Random();
-            randomHamster = random.Next(allIDs.Count);
+           await AddIDsToHamsterList(allHamsterIDs, highestNumber);
 
-            var getRandomHamster = (allIDs[randomHamster]);
+
+     
+           getRandomHamster = GetOneRandomHamster(getRandomHamster, allHamsterIDs);
+
+
 
             return getRandomHamster;
         }
+
+        private async Task AddIDsToHamsterList(List<Hamster> allHamsterIDs, int highestNumber)
+        {
+            for (int i = 1; i <= highestNumber; i++)
+            {
+
+                var hamster = await this.hamsterDbContext.Hamsters.SingleOrDefaultAsync(x => x.Id == i);
+
+                if (hamster is null)
+                { }
+
+                else
+                {
+                    allHamsterIDs.Add(hamster);
+                }
+            }
+
+        }
+
+        //TODO: Funkar som sync?
+        private Hamster GetOneRandomHamster(Hamster getRandomHamster, List<Hamster> allIDs)
+        {
+            int randomHamster = 0;
+            var random = new Random();
+
+            randomHamster = random.Next(allIDs.Count);
+
+
+            randomHamster = random.Next(allIDs.Count);
+            getRandomHamster = (allIDs[randomHamster]);
+            
+            return getRandomHamster;
+        }
+
+
+  
 
         //TODO: fixa att en sak blir uppdaterad och resten får gamla värden, eller om det sker i frontend?
         public async Task<Hamster> UpdateHamster(int id, Hamster hamsterToUpdate)
@@ -141,6 +167,20 @@ namespace HamsterWarsApi.Repositories
                return hamster;
             }
             return null;
+        }
+
+        public Hamster AddValuesToHamster(Hamster hamster, string Name, int Age, string FavFood, string Loves, string ImgName, int Wins, int losses, int games)
+        {
+            hamster.Name = Name;
+            hamster.Age = Age;
+            hamster.FavFood = FavFood;
+            hamster.Loves = Loves;
+            hamster.ImgName = ImgName;
+            hamster.Wins = Wins;
+            hamster.Losses = losses;
+            hamster.Games = games;
+
+            return hamster;
         }
     }
 }
