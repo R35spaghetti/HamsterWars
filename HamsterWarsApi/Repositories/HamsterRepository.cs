@@ -138,8 +138,6 @@ namespace HamsterWarsApi.Repositories
 
             randomHamster = random.Next(allIDs.Count);
 
-
-            randomHamster = random.Next(allIDs.Count);
             getRandomHamster = (allIDs[randomHamster]);
             
             return getRandomHamster;
